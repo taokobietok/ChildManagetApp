@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid} {
+      allow read: if request.auth != null && (
+        request.auth.uid == uid ||
+        (resource.data.isParent == true) ||
+        ('linkedParent' in resource.data && resource.data.linkedParent == request.auth.uid) ||
+        ('linkedChildren' in resource.data && request.auth.uid in resource.data.linkedChildren)
+      );
+      allow create: if request.auth != null && request.auth.uid == uid;
+      allow update: if request.auth != null && (
+        // Cho phép người dùng cập nhật tài liệu của chính họ
+        request.auth.uid == uid ||
+        // Cho phép phụ huynh cập nhật thông tin liên kết của trẻ
+        (request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['linkedParent', 'name', 'age']) &&
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isParent == true) ||
+        // Cho phép phụ huynh cập nhật danh sách trẻ của họ
+        (request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['linkedChildren']) &&
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isParent == true) ||
+        // Cho phép trẻ cập nhật thông tin của mình khi liên kết với phụ huynh
+        (request.auth.uid == uid && 
+         request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['linkedParent', 'name', 'age']))
+      );
+    }
+    match /link_codes/{code} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isParent == true;
+      allow delete: if request.auth != null && (
+        resource.data.parentUid == request.auth.uid ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.linkedParent == resource.data.parentUid
+      );
+    }
+  }
+} 

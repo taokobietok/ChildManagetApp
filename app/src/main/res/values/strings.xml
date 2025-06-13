@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ChildManagetApp</string>
+    <string name="default_notification_channel_id">default_channel</string>
+    <string name="profile_button_description">Profile</string>
+    <string name="default_web_client_id">89893227121-5i9se90sc1mme53tabueia62cj7nckra.apps.googleusercontent.com</string>
+
+</resources>

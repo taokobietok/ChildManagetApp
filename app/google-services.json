@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "829203329296",
+    "project_id": "manataskapplication",
+    "storage_bucket": "manataskapplication.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829203329296:android:14ece0ea27507a3be17595",
+        "android_client_info": {
+          "package_name": "com.thanhtuan.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829203329296-h6f1saf7p8oaj7du6mhv51k7smi03n3l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thanhtuan.myapp",
+            "certificate_hash": "e0da55303a8e0e30b5c6d19cfea3472f3108f5db"
+          }
+        },
+        {
+          "client_id": "829203329296-sc008v9ktusp146boaanm6p5ubgqur8m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB36ptZASAxQztlDh_EHRlA-lq770n2pI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829203329296-sc008v9ktusp146boaanm6p5ubgqur8m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
